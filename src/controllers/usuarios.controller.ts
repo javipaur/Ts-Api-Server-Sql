@@ -1,9 +1,9 @@
 import { Request,Response } from "express";
-import {connect}from '../db/connection';
+import Usuario from "../model/Users";
 
-export async function getUsuarios(req:Request,res:Response){
 
-    const conn=await connect();
-    const usuarios =await conn.query('SELECT * FROM employees');
-    res.json(usuarios[0]);
+export const getUsuarios= async (req:Request,res:Response)=>{
+
+    const usuarios = await Usuario.findAll();
+    res.json(usuarios);
 }

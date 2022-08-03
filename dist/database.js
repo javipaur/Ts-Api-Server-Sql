@@ -13,7 +13,7 @@ exports.connect = void 0;
 const promise_1 = require("mysql2/promise");
 function connect() {
     return __awaiter(this, void 0, void 0, function* () {
-        const connection = yield (0, promise_1.createPool)({
+        const db = yield (0, promise_1.createPool)({
             user: "root",
             host: "containers-us-west-81.railway.app",
             password: "KvjFWYlmAzRyqcYOL3Q1",
@@ -21,7 +21,7 @@ function connect() {
             database: "railway",
             connectionLimit: 10
         });
-        return connection;
+        return db;
     });
 }
 exports.connect = connect;
