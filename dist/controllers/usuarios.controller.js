@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUsuarios = void 0;
-const Users_1 = __importDefault(require("../model/Users"));
+const Usuario_1 = __importDefault(require("../model/Usuario"));
 const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const usuarios = yield Users_1.default.findAll();
+    const usuarios = yield Usuario_1.default.findAll();
     res.json(usuarios);
 });
 exports.getUsuarios = getUsuarios;

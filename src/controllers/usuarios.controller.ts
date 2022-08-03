@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import Usuario from "../model/Users";
+import Usuario from "../model/Usuario";
 
 
 export const getUsuarios= async (req:Request,res:Response)=>{

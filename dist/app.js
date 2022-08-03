@@ -18,16 +18,29 @@ const morgan_1 = __importDefault(require("morgan"));
 const index_routes_1 = __importDefault(require("./routes/index.routes"));
 const usuarios_routes_1 = __importDefault(require("./routes/usuarios.routes"));
 const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
+const database_1 = __importDefault(require("./database"));
 class App {
     constructor(port) {
         this.port = port;
         this.app = (0, express_1.default)();
         this.settings();
+        this.dbConnection();
         this.middlewares();
         this.routes();
     }
     settings() {
         this.app.set('port', this.port || process.env.PORT || 3000);
+    }
+    dbConnection() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield database_1.default.authenticate();
+                console.log('Database online');
+            }
+            catch (error) {
+                throw new Error('error');
+            }
+        });
     }
     middlewares() {
         this.app.use((0, morgan_1.default)('dev'));
