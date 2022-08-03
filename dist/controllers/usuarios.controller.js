@@ -8,14 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUsuarios = void 0;
-const Usuario_1 = __importDefault(require("../model/Usuario"));
+const database_1 = require("../database");
 const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const usuarios = yield Usuario_1.default.findAll();
-    res.json(usuarios);
+    const conn = yield (0, database_1.connect)();
+    const usuarios = yield conn.query('SELECT * FROM employees');
+    res.json(usuarios[0]);
 });
 exports.getUsuarios = getUsuarios;
