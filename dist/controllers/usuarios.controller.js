@@ -15,5 +15,7 @@ const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const conn = yield (0, database_1.connect)();
     const usuarios = yield conn.query('SELECT * FROM employees');
     res.json(usuarios[0]);
+    //const usuarios = await Usuario.findAll();
+    res.json({ usuarios });
 });
 exports.getUsuarios = getUsuarios;
