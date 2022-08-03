@@ -1,5 +1,6 @@
 import {createPool} from'mysql2/promise';
 
+import {} from '../database';
 export async function connect(){
         const db = await createPool({
             user: "root",
