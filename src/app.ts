@@ -2,7 +2,7 @@ import express,{Application} from 'express';
 import morgan from 'morgan';
 import IndexRoutes from './routes/index.routes';
 import UsersRoutes from './routes/usuarios.routes';
-
+import AuthRoutes from './routes/auth.routes';
 
 export class App{
 
@@ -28,6 +28,7 @@ export class App{
     routes(){
         this.app.use(IndexRoutes);
         this.app.use('/usuarios',UsersRoutes);
+        this.app.use('/Auth',AuthRoutes);
     }
 
     async listen(){

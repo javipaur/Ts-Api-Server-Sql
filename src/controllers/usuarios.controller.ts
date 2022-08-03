@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import {connect}from '../database';
+import {connect}from '../db/connection';
 
 export async function getUsuarios(req:Request,res:Response){
 
