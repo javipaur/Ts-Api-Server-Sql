@@ -3,6 +3,7 @@ import IndexRoutes from './routes/index.routes';
 import UsersRoutes from './routes/usuarios.routes';
 import AuthRoutes from './routes/auth.routes';
 import morgan from 'morgan';
+import sequelize from './database';
 
 export class App{
 
@@ -12,6 +13,7 @@ export class App{
     constructor(private port?:number| string){
         this.app=express();
         this.settings();
+        this.dbConnection();
         this.middlewares();
         this.routes();
 
@@ -21,6 +23,18 @@ export class App{
        this.app.set('port',this.port|| process.env.PORT || 3000) 
     }
 
+    async dbConnection() {
+
+        try {
+            
+            await sequelize.sync({force:false});
+            console.log('Database online');
+
+        } catch (error) {
+            console.error('Unable to connect to the database:', error);
+          }
+
+    }
 
     middlewares(){
         this.app.use(morgan('dev'))

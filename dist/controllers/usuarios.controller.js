@@ -8,14 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUsuarios = void 0;
-const database_1 = require("../database");
+const Employees_1 = __importDefault(require("../interfaces/Employees"));
 const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const conn = yield (0, database_1.connect)();
-    const usuarios = yield conn.query('SELECT * FROM employees');
-    res.json(usuarios[0]);
-    //const usuarios = await Usuario.findAll();
+    //const conn=await connect();
+    // const usuarios =await conn.query('SELECT * FROM employees');
+    // res.json(usuarios[0]);
+    const usuarios = yield Employees_1.default.findAll();
+    res.json({ usuarios });
     res.json({ usuarios });
 });
 exports.getUsuarios = getUsuarios;
