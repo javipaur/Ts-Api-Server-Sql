@@ -12,14 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsuarios = void 0;
-const Employees_1 = __importDefault(require("../interfaces/Employees"));
+exports.createUsuarios = exports.getUsuarios = void 0;
+const Employees_1 = __importDefault(require("../models/Employees"));
+const User_1 = __importDefault(require("../models/User"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //const conn=await connect();
-    // const usuarios =await conn.query('SELECT * FROM employees');
-    // res.json(usuarios[0]);
     const usuarios = yield Employees_1.default.findAll();
-    res.json({ usuarios });
     res.json({ usuarios });
 });
 exports.getUsuarios = getUsuarios;
+const createUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, email, password } = req.body;
+    //Guardando Nuevo Usuario
+    const newUsuario = yield User_1.default.create({
+        name,
+        email,
+        password
+    });
+    //Token
+    const token = jsonwebtoken_1.default.sign({ id: newUsuario.id }, process.env.TOKEN_SECRET || 'tokentest');
+    res.header('auth-token', token).json(newUsuario);
+    //res.json({"msj":'Usuario creado correctamente!',"token":token });
+});
+exports.createUsuarios = createUsuarios;

@@ -21,6 +21,7 @@ export class App{
 
     settings(){
        this.app.set('port',this.port|| process.env.PORT || 3000) 
+       
     }
 
     async dbConnection() {
@@ -38,6 +39,7 @@ export class App{
 
     middlewares(){
         this.app.use(morgan('dev'))
+        this.app.use(express.json());
     }
 
     routes(){
