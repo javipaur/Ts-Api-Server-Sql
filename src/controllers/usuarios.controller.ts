@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import Employees from '../models/Employees';
-import User, { encryptPassword } from "../models/User";
+import User, { createUuId, encryptPassword } from "../models/User";
 import jwt from "jsonwebtoken";
 import { IUser } from "../interface/IUser";
 
@@ -15,14 +15,17 @@ export const createUsuarios= async (req:Request,res:Response)=>{
    const user:IUser =new User({name,email,password});
    //Encriptar pws en MD5
    user.password=await encryptPassword(password);
+   //IdentificadorUsuario
+   user.identificadorUsuario=await createUuId();
    const newUsuario =await User.create({
       name:user.name,
       email:user.email,
-      password:user.password
+      password:user.password,
+      identificadorUsuario:user.identificadorUsuario 
    });
 
    //Token
-   const token:string =jwt.sign({id:newUsuario.id},process.env.TOKEN_SECRET || 'tokentest');
+   const token:string =jwt.sign({id:newUsuario.identificadorUsuario},process.env.TOKEN_SECRET || 'tokentest');
 
    res.header('auth-token',token).json(newUsuario);
    //res.json({"msj":'Usuario creado correctamente!',"token":token });

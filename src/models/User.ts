@@ -2,7 +2,7 @@
 import sequelize from "../database";
 import { DataTypes } from 'sequelize';
 import bcrypt from 'bcryptjs';
-
+import { v4 as uuidv4 } from 'uuid';
 
 export const User = sequelize.define(
     "users",
@@ -27,6 +27,10 @@ export const User = sequelize.define(
         type: DataTypes.STRING,
         required:true,
       },
+      identificadorUsuario:{
+        type: DataTypes.STRING,
+        //required:true,
+      },
       
     },
     {
@@ -38,8 +42,14 @@ export const User = sequelize.define(
      return bcrypt.hash(password,salt);
   }
 
-  export const validatePassword=async function(password1:string,password2:string):Promise<boolean>{
-     return await bcrypt.compare(password1,password2);
+  export const validatePassword=async function(passwordBd:string,passwordUser:string):Promise<boolean>{
+
+    return await bcrypt.compare(passwordBd,passwordUser);
+  }
+
+  export const createUuId= async function():Promise<string>{
+
+    return await uuidv4();
   }
 
   export default User;

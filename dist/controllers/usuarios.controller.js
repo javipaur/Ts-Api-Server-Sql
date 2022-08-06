@@ -50,13 +50,16 @@ const createUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const user = new User_1.default({ name, email, password });
     //Encriptar pws en MD5
     user.password = yield (0, User_1.encryptPassword)(password);
+    //IdentificadorUsuario
+    user.identificadorUsuario = yield (0, User_1.createUuId)();
     const newUsuario = yield User_1.default.create({
         name: user.name,
         email: user.email,
-        password: user.password
+        password: user.password,
+        identificadorUsuario: user.identificadorUsuario
     });
     //Token
-    const token = jsonwebtoken_1.default.sign({ id: newUsuario.id }, process.env.TOKEN_SECRET || 'tokentest');
+    const token = jsonwebtoken_1.default.sign({ id: newUsuario.identificadorUsuario }, process.env.TOKEN_SECRET || 'tokentest');
     res.header('auth-token', token).json(newUsuario);
     //res.json({"msj":'Usuario creado correctamente!',"token":token });
 });
