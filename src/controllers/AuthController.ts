@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import User, { validatePassword } from "../models/User";
+import User from "../models/User";
 import jwt from 'jsonwebtoken';
+import { validatePassword } from "../utils/ValidatePassword";
 
 export const singup = (req:Request,res:Response) => {
    res.send('singup');
@@ -33,7 +34,8 @@ export const singin = async (req:Request,res:Response) => {
     res.header('auth-token',token).json(User);
 
 }
-export const profile = (req:Request,res:Response)=>{
-    
-    res.send('profile');
+export const profile = async (req:Request,res:Response)=>{
+    const user=await User.findById(req.userId,{pasword:0});
+    if(!user)return res.status(404).json('No User found');
+    res.json(user);
 }

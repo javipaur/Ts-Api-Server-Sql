@@ -17,7 +17,6 @@ exports.Role = database_1.default.define("role", {
         required: true,
         lowercase: true,
     },
-    versionKey: {
-        type: sequelize_1.DataTypes.BOOLEAN,
-    }
+}, {
+    timestamp: true,
 });

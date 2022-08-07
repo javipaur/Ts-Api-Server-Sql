@@ -28,7 +28,7 @@ export class App{
 
         try {
             
-            await sequelize.sync({force:true});
+            await sequelize.sync({force:false});
             console.log('Database online');
 
         } catch (error) {

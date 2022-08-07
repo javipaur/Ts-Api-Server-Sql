@@ -13,10 +13,10 @@ export const Role = sequelize.define("role",{
             required:true,
             lowercase:true,
           },  
-          versionKey:{
-            type: DataTypes.BOOLEAN,
-           
-          }
+          
+    },
+    {
+      timestamp: true,
     });
    
     

@@ -12,16 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TokenValidation = void 0;
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const TokenValidation = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const token = req.header('auth-token');
-    if (!token)
-        return res.status(401).json('Access denied');
-    //Verificamos los datos que estan dentro del token
-    const payload = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET || 'tokentest');
-    console.log('payload' + payload);
-    req.userId = payload.id;
-    next();
+exports.encryptPassword = void 0;
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const encryptPassword = (password) => __awaiter(void 0, void 0, void 0, function* () {
+    const salt = yield bcryptjs_1.default.genSalt(10);
+    return bcryptjs_1.default.hash(password, salt);
 });
-exports.TokenValidation = TokenValidation;
+exports.encryptPassword = encryptPassword;

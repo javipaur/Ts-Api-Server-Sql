@@ -1,7 +1,9 @@
 import { Request,Response } from "express";
-import User, { createUuId, encryptPassword } from "../models/User";
+import User from "../models/User";
 import jwt from "jsonwebtoken";
 import { IUser } from "../interface/IUser";
+import { encryptPassword } from "../utils/EncriptPassword";
+import { createUuId } from "../utils/CreateUid";
 
 export const getUsuarios= async (req:Request,res:Response)=>{
    const usuarios = await User.findAll();

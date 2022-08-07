@@ -1,9 +1,7 @@
-
 import sequelize from "../database";
 import { DataTypes } from 'sequelize';
-import bcrypt from 'bcryptjs';
-import { v4 as uuidv4 } from 'uuid';
 import { Role } from './Role';
+
 
 export const User = sequelize.define("users",
     {
@@ -45,21 +43,6 @@ export const User = sequelize.define("users",
     as: "role",
     foreignKey: "userId",
   });
-
-  export const encryptPassword =async (password:string):Promise<string> =>{
-     const salt =await bcrypt.genSalt(10);
-     return bcrypt.hash(password,salt);
-  }
-
-  export const validatePassword=async function(passwordBd:string,passwordUser:string):Promise<boolean>{
-
-    return await bcrypt.compare(passwordBd,passwordUser);
-  }
-
-  export const createUuId= async function():Promise<string>{
-
-    return await uuidv4();
-  }
 
   export default User;
   
