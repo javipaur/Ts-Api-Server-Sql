@@ -2,8 +2,9 @@ import express,{Application} from 'express';
 import IndexRoutes from './routes/index.routes';
 import UsersRoutes from './routes/usuarios.routes';
 import AuthRoutes from './routes/auth.routes';
-import morgan from 'morgan';
+import ProgramRoutes from './routes/program.routes';
 import sequelize from './database';
+import morgan from 'morgan';
 
 export class App{
 
@@ -46,6 +47,8 @@ export class App{
         this.app.use(IndexRoutes);
         this.app.use('/usuarios',UsersRoutes);
         this.app.use('/Auth',AuthRoutes);
+        this.app.use('/Program',ProgramRoutes);
+        
     }
 
     async listen(){

@@ -17,8 +17,9 @@ const express_1 = __importDefault(require("express"));
 const index_routes_1 = __importDefault(require("./routes/index.routes"));
 const usuarios_routes_1 = __importDefault(require("./routes/usuarios.routes"));
 const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
-const morgan_1 = __importDefault(require("morgan"));
+const program_routes_1 = __importDefault(require("./routes/program.routes"));
 const database_1 = __importDefault(require("./database"));
+const morgan_1 = __importDefault(require("morgan"));
 class App {
     constructor(port) {
         this.port = port;
@@ -50,6 +51,7 @@ class App {
         this.app.use(index_routes_1.default);
         this.app.use('/usuarios', usuarios_routes_1.default);
         this.app.use('/Auth', auth_routes_1.default);
+        this.app.use('/Program', program_routes_1.default);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
