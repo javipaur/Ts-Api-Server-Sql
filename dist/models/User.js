@@ -17,6 +17,7 @@ const database_1 = __importDefault(require("../database"));
 const sequelize_1 = require("sequelize");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const uuid_1 = require("uuid");
+const Role_1 = require("./Role");
 exports.User = database_1.default.define("users", {
     id: {
         type: sequelize_1.DataTypes.BIGINT,
@@ -38,12 +39,21 @@ exports.User = database_1.default.define("users", {
         type: sequelize_1.DataTypes.STRING,
         required: true,
     },
-    identificadorUsuario: {
+    userId: {
         type: sequelize_1.DataTypes.STRING,
-        //required:true,
+        required: true,
+        unique: true,
+    },
+    roles: {
+        type: sequelize_1.DataTypes.STRING,
     },
 }, {
-    timestamp: false,
+    timestamp: true,
+});
+exports.User.belongsToMany(Role_1.Role, {
+    through: "user_roles",
+    as: "role",
+    foreignKey: "userId",
 });
 const encryptPassword = (password) => __awaiter(void 0, void 0, void 0, function* () {
     const salt = yield bcryptjs_1.default.genSalt(10);

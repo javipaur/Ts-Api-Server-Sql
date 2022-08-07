@@ -36,11 +36,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUsuarios = exports.getUsuarios = void 0;
-const Employees_1 = __importDefault(require("../models/Employees"));
 const User_1 = __importStar(require("../models/User"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const usuarios = yield Employees_1.default.findAll();
+    const usuarios = yield User_1.default.findAll();
     res.json({ usuarios });
 });
 exports.getUsuarios = getUsuarios;
@@ -51,15 +50,15 @@ const createUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function*
     //Encriptar pws en MD5
     user.password = yield (0, User_1.encryptPassword)(password);
     //IdentificadorUsuario
-    user.identificadorUsuario = yield (0, User_1.createUuId)();
+    user.userId = yield (0, User_1.createUuId)();
     const newUsuario = yield User_1.default.create({
         name: user.name,
         email: user.email,
         password: user.password,
-        identificadorUsuario: user.identificadorUsuario
+        userId: user.userId
     });
     //Token
-    const token = jsonwebtoken_1.default.sign({ id: newUsuario.identificadorUsuario }, process.env.TOKEN_SECRET || 'tokentest');
+    const token = jsonwebtoken_1.default.sign({ id: newUsuario.userId }, process.env.TOKEN_SECRET || 'tokentest');
     res.header('auth-token', token).json(newUsuario);
     //res.json({"msj":'Usuario creado correctamente!',"token":token });
 });

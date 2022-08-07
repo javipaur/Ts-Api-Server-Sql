@@ -58,7 +58,7 @@ const singin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(400).json('Invalid Password');
     }
     //Generamso token
-    const token = jsonwebtoken_1.default.sign({ id: user.id }, process.env.TOKEN_SECRET || 'tokentest', { expiresIn: 60 * 60 * 24 });
+    const token = jsonwebtoken_1.default.sign({ id: user.userId }, process.env.TOKEN_SECRET || 'tokentest', { expiresIn: 60 * 60 * 24 });
     res.header('auth-token', token).json(User_1.default);
 });
 exports.singin = singin;

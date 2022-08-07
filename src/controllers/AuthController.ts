@@ -27,7 +27,7 @@ export const singin = async (req:Request,res:Response) => {
     }
 
     //Generamso token
-    const token=jwt.sign({id:user.id},process.env.TOKEN_SECRET || 'tokentest',
+    const token=jwt.sign({id:user.userId},process.env.TOKEN_SECRET || 'tokentest',
     {expiresIn:60*60*24});
 
     res.header('auth-token',token).json(User);
