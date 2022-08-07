@@ -3,7 +3,7 @@ import IndexRoutes from './routes/index.routes';
 import UsersRoutes from './routes/usuarios.routes';
 import AuthRoutes from './routes/auth.routes';
 import ProgramRoutes from './routes/program.routes';
-import sequelize from './database';
+import sequelize from '../sql/database';
 import morgan from 'morgan';
 
 export class App{
