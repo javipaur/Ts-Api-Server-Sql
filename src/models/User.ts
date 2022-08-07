@@ -1,9 +1,9 @@
 import sequelize from "../database";
 import { DataTypes } from 'sequelize';
-import { Role } from './Role';
+import Role from "./Role";
 
 
-export const User = sequelize.define("users",
+const User = sequelize.define("users",
     {
       id: {
         type: DataTypes.BIGINT,
@@ -38,11 +38,11 @@ export const User = sequelize.define("users",
       timestamp: true,
     }
   );
-  User.belongsToMany(Role, {
-    through: "user_roles",
-    as: "role",
-    foreignKey: "userId",
-  });
+  // User.belongsToMany(Role, {
+  //   through: "user_roles",
+  //   as: "role",
+  //   foreignKey: "userId",
+  // });
 
   export default User;
   

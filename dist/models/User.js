@@ -3,11 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
 const database_1 = __importDefault(require("../database"));
 const sequelize_1 = require("sequelize");
-const Role_1 = require("./Role");
-exports.User = database_1.default.define("users", {
+const User = database_1.default.define("users", {
     id: {
         type: sequelize_1.DataTypes.BIGINT,
         primaryKey: true,
@@ -39,9 +37,9 @@ exports.User = database_1.default.define("users", {
 }, {
     timestamp: true,
 });
-exports.User.belongsToMany(Role_1.Role, {
-    through: "user_roles",
-    as: "role",
-    foreignKey: "userId",
-});
-exports.default = exports.User;
+// User.belongsToMany(Role, {
+//   through: "user_roles",
+//   as: "role",
+//   foreignKey: "userId",
+// });
+exports.default = User;
