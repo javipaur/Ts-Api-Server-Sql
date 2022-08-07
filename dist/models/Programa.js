@@ -16,7 +16,5 @@ const Programa = database_1.default.define("programa", {
         required: true,
         lowercase: true,
     },
-}, {
-    timestamp: true,
 });
 exports.default = Programa;

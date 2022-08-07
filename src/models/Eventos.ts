@@ -13,9 +13,7 @@ const Eventos = sequelize.define("eventos",{
         lowercase:true,
       },  
       
-},
-{
-  timestamp: true,
-});
+}
+);
 
 export default Eventos;

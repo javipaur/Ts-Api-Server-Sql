@@ -14,9 +14,8 @@ const Programa = sequelize.define("programa",{
         lowercase:true,
       },  
       
-},
-{
-  timestamp: true,
-});
+}
+
+);
 
 export default Programa;

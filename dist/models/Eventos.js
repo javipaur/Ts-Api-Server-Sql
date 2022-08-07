@@ -16,7 +16,5 @@ const Eventos = database_1.default.define("eventos", {
         required: true,
         lowercase: true,
     },
-}, {
-    timestamp: true,
 });
 exports.default = Eventos;
