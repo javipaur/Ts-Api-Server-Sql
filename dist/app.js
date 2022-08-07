@@ -34,7 +34,7 @@ class App {
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield database_1.default.sync({ force: false });
+                yield database_1.default.sync({ force: true });
                 console.log('Database online');
             }
             catch (error) {

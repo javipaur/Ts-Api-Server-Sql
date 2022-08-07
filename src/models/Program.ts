@@ -1,8 +1,8 @@
-import { DataTypes }  from "sequelize";
+import { DataTypes } from "sequelize";
 import sequelize from "../database";
 
 
-export const Role = sequelize.define("role",{
+export const Program = sequelize.define("program",{
         id: {
             type: DataTypes.BIGINT,
             primaryKey: true,
@@ -18,6 +18,7 @@ export const Role = sequelize.define("role",{
     {
       timestamp: true,
     });
+   // Programa.hasMany(Evento);
    
     
    
