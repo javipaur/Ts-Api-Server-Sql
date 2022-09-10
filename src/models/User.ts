@@ -1,47 +1,34 @@
-import sequelize from "../../sql/database";
-import { DataTypes } from 'sequelize';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
+@Entity()
+export class User extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
+  @Column()
+  userId:string;
 
-const User = sequelize.define("users",
-    {
-      id: {
-        type: DataTypes.BIGINT,
-        primaryKey: true,
-        autoIncrement: true, 
-      },
-      name: {
-        type: DataTypes.STRING,
-        required:true,
-        lowercase:true,
-      },
-      email: {
-        type: DataTypes.STRING,
-        required:true,
-        lowercase:true,
-        unique:true,
-      },
-      password: {
-        type: DataTypes.STRING,
-        required:true,
-      },
-      userId:{
-        type: DataTypes.STRING,
-        required:true,
-        unique:true,
-      },
-      roles:{
-        type: DataTypes.STRING,  
-      },   
-    },
-    {
-      timestamp: true,
-    }
-  );
-  // User.belongsToMany(Role, {
-  //   through: "user_roles",
-  //   as: "role",
-  //   foreignKey: "userId",
-  // });
-
-  export default User;
+  @Column()
+  nombre: string;
   
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
+
+  @Column({ default: true })
+  active: boolean;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+}

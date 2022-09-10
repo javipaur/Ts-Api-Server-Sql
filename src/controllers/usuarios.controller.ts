@@ -1,33 +1,31 @@
 import { Request,Response } from "express";
-import User from "../models/User";
+
 import jwt from "jsonwebtoken";
 import { IUser } from "../interface/IUser";
 import { encryptPassword } from "../utils/EncriptPassword";
 import { createUuId } from "../utils/CreateUid";
+import { User } from "../models/User";
+import AppDataSource from "../../sql/database";
 
 export const getUsuarios= async (req:Request,res:Response)=>{
-   const usuarios = await User.findAll();
+   const usuarios = await User.find();
    res.json({ usuarios });
 }
 
 export const createUsuarios= async (req:Request,res:Response)=>{
-   const {name,email,password}=req.body;
+   const {nombre,email,password}=req.body;
    //Guardando Nuevo Usuario
-   const user:IUser =new User({name,email,password});
+   const user:IUser =new User();
+   user.nombre=nombre;
+   user.email=email;
    //Encriptar pws en MD5
    user.password=await encryptPassword(password);
    //IdentificadorUsuario
    user.userId=await createUuId();
-   const newUsuario =await User.create({
-      name:user.name,
-      email:user.email,
-      password:user.password,
-      userId:user.userId
-   });
-
+   await AppDataSource.manager.save(user);
    //Token
-   const token:string =jwt.sign({id:newUsuario.userId},process.env.TOKEN_SECRET || 'tokentest');
+   const token:string =jwt.sign({id:user.userId},process.env.TOKEN_SECRET || 'tokentest');
 
-   res.header('auth-token',token).json(newUsuario);
-   //res.json({"msj":'Usuario creado correctamente!',"token":token });
+   res.header('auth-token',token).json(user);
+   res.json({"msj":'Usuario creado correctamente!',"token":token });
 }

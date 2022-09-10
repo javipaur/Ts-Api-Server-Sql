@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import User from "../models/User";
+
 import jwt from 'jsonwebtoken';
+import { User } from "../models/User";
 import { validatePassword } from "../utils/ValidatePassword";
 
 export const singup = (req:Request,res:Response) => {
@@ -10,13 +11,8 @@ export const singin = async (req:Request,res:Response) => {
    
     console.log(req.body);
     //Buscamos por el mail 
-    const user =await User.findOne({
-        where:{
-            email:req.body.email
-        }
-
-    });
-
+    const user = await User.findOneBy({email: req.body.email}) 
+    
     if(!user){
          return res.status(400).json('Email or pasword is wrong');
     }
@@ -35,7 +31,8 @@ export const singin = async (req:Request,res:Response) => {
 
 }
 export const profile = async (req:Request,res:Response)=>{
-    const user=await User.findById(req.userId,{pasword:0});
+   const user = await User.findOneBy({ userId: req.userId}) 
+   //const user=await User.findById(req.userId,{pasword:0});
     if(!user)return res.status(404).json('No User found');
     res.json(user);
 }

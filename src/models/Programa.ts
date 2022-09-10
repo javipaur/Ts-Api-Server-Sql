@@ -1,21 +1,37 @@
-import { DataTypes } from "sequelize/types";
-import sequelize from "../../sql/database";
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    BaseEntity,
+  } from "typeorm";
+  @Entity()
+  export class Programa extends BaseEntity {
+    @PrimaryGeneratedColumn()
+    id: number;
+  
+    @Column()
+    title: string;
+  
+    @Column()
+    day: string;
 
+    @Column()
+    hour: string;
 
-const Programa = sequelize.define("programa",{
-    id: {
-        type: DataTypes.BIGINT,
-        primaryKey: true,
-        autoIncrement: true, 
-      },
-      name: {
-        type: DataTypes.STRING,
-        required:true,
-        lowercase:true,
-      },  
-      
-}
+    @Column()
+    place_text: string;
 
-);
+    @Column()
+    place_lat: string;
 
-export default Programa;
+    @Column()
+    category: string;
+
+    @Column()
+    description: string;
+  
+    @Column({ default: true })
+    cancelled: boolean;
+  
+  }
+  

@@ -1,28 +1,21 @@
+import { DataSource } from "typeorm";
+import { Programa } from "../src/models/Programa";
+import { User } from "../src/models/User";
 
-const { Sequelize } = require('sequelize');
 
-//export async function connect(){
- const sequelize = new Sequelize(
-    'railway', 
-    'root', 
-    'KvjFWYlmAzRyqcYOL3Q1', {
-        host: 'containers-us-west-81.railway.app',
-        port: 7890,
-        dialect: 'mysql',
-        // logging: false,
-    });
-    
-        // const connection = await createPool({
-        //     user: "root",
-        //     host: "containers-us-west-81.railway.app",
-        //     password: "KvjFWYlmAzRyqcYOL3Q1",
-        //     port:7890,
-        //     database: "railway",
-        //     connectionLimit:10
-        //     });
+export const AppDataSource = new DataSource({
+  type: "mysql",
+  host: "localhost",
+  port: 3306,
+  username: "root",
+  password: "",
+  database: "typeorm",
+  synchronize: true,
+  logging: true,
+  entities: [User, Programa],
+  subscribers: [],
+  migrations: [],
+});
 
-    //return connection;
-    
-//}
 
-export default sequelize;
+export default AppDataSource;

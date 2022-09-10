@@ -3,9 +3,9 @@ import IndexRoutes from './routes/index.routes';
 import UsersRoutes from './routes/usuarios.routes';
 import AuthRoutes from './routes/auth.routes';
 import ProgramRoutes from './routes/program.routes';
-import sequelize from '../sql/database';
 import morgan from 'morgan';
-
+import "reflect-metadata"
+import AppDataSource from '../sql/database';
 export class App{
 
     private app:Application;
@@ -13,29 +13,23 @@ export class App{
 
     constructor(private port?:number| string){
         this.app=express();
+        this.database();
         this.settings();
-        this.dbConnection();
         this.middlewares();
         this.routes();
 
     }
 
     settings(){
-       this.app.set('port',this.port|| process.env.PORT || 3000) 
-       
+       this.app.set('port',this.port|| process.env.PORT || 3000)       
     }
 
-    async dbConnection() {
-
-        try {
-            
-            await sequelize.sync({force:true});
-            console.log('Database online');
-
-        } catch (error) {
-            console.error('Unable to connect to the database:', error);
-          }
-
+    async database(){
+    try {
+        await AppDataSource.initialize();
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     middlewares(){
