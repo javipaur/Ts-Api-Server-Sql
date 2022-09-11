@@ -3,7 +3,9 @@ import {
     Column,
     PrimaryGeneratedColumn,
     BaseEntity,
+    OneToMany,
   } from "typeorm";
+import { Dias } from "./Dias";
   @Entity()
   export class Programa extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -13,25 +15,18 @@ import {
     title: string;
   
     @Column()
-    day: string;
+    descripcion: string;
 
     @Column()
-    hour: string;
+    fecInicio: Date;
 
     @Column()
-    place_text: string;
+    fecFin: Date;
 
-    @Column()
-    place_lat: string;
-
-    @Column()
-    category: string;
-
-    @Column()
-    description: string;
-  
     @Column({ default: true })
     cancelled: boolean;
-  
+
+    @OneToMany(() => Dias, (dias) => dias.programa)
+    dias: Dias[]
   }
   

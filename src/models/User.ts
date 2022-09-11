@@ -5,6 +5,7 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
 @Entity()
 export class User extends BaseEntity {
@@ -31,4 +32,5 @@ export class User extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
 }
