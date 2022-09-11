@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+import { Categorias } from "../src/models/Categorias";
 import { Dias } from "../src/models/Dias";
 import { Programa } from "../src/models/Programa";
 import { User } from "../src/models/User";
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
   database: "typeorm",
   synchronize: true,
   logging: true,
-  entities: [User, Programa,Dias],
+  entities: [User, Programa,Dias,Categorias],
   subscribers: [],
   migrations: [],
 });
