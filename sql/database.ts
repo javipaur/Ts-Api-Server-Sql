@@ -1,8 +1,14 @@
 import { DataSource } from "typeorm";
-import { Categorias } from "../src/models/Categorias";
-import { Dias } from "../src/models/Dias";
-import { Programa } from "../src/models/Programa";
-import { User } from "../src/models/User";
+import { Categorias } from "../src/models/Categorias/Categorias";
+import { Cuadrillas } from "../src/models/Cuadrillas/Cuadrilla";
+import { Dias } from "../src/models/Programa/Dias";
+import { Programa } from "../src/models/Programa/Programa";
+import { Reservas } from "../src/models/Reservas/Reservas";
+import { Bares } from "../src/models/Terraceo/Bares";
+import { Tpv } from "../src/models/Tpv/Tpv";
+import { Perfiles } from "../src/models/Usuarios/Perfiles";
+import { Roles } from "../src/models/Usuarios/Roles";
+import { User } from "../src/models/Usuarios/User";
 
 
 export const AppDataSource = new DataSource({
@@ -14,7 +20,7 @@ export const AppDataSource = new DataSource({
   database: "typeorm",
   synchronize: true,
   logging: true,
-  entities: [User, Programa,Dias,Categorias],
+  entities: [User,Perfiles,Roles, Programa,Dias,Categorias,Cuadrillas,Bares,Reservas,Tpv],
   subscribers: [],
   migrations: [],
 });

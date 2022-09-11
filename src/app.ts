@@ -3,6 +3,7 @@ import IndexRoutes from './routes/index.routes';
 import UsersRoutes from './routes/usuarios.routes';
 import AuthRoutes from './routes/auth.routes';
 import ProgramRoutes from './routes/program.routes';
+import CategoriasRoutes from './routes/categorias.routes';
 import morgan from 'morgan';
 import "reflect-metadata"
 import AppDataSource from '../sql/database';
@@ -42,6 +43,7 @@ export class App{
         this.app.use('/usuarios',UsersRoutes);
         this.app.use('/Auth',AuthRoutes);
         this.app.use('/Program',ProgramRoutes);
+        this.app.use('/Categorias',CategoriasRoutes);
         
     }
 

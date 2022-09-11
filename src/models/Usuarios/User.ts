@@ -5,8 +5,13 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
+import { Cuadrillas } from '../Cuadrillas/Cuadrilla';
+import { Perfiles } from './Perfiles';
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -32,5 +37,14 @@ export class User extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Cuadrillas, (cuadrilla) => cuadrilla.id)
+  cuadrilla: Cuadrillas
+
+  @OneToOne(() => Perfiles)
+  @JoinColumn()
+  pefiles: Perfiles[]
+
+
 
 }

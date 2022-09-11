@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { IUser } from "../interface/IUser";
 import { encryptPassword } from "../utils/EncriptPassword";
 import { createUuId } from "../utils/CreateUid";
-import { User } from "../models/User";
+import { User } from "../models/Usuarios/User";
 import AppDataSource from "../../sql/database";
 
 export const getUsuarios= async (req:Request,res:Response)=>{

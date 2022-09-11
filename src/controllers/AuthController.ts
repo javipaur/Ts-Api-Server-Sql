@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import jwt from 'jsonwebtoken';
-import { User } from "../models/User";
+import { User } from "../models/Usuarios/User";
 import { validatePassword } from "../utils/ValidatePassword";
 
 export const singup = (req:Request,res:Response) => {
