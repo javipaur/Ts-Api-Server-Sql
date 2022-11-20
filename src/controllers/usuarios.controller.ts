@@ -26,6 +26,10 @@ export const createUsuarios= async (req:Request,res:Response)=>{
    //Token
    const token:string =jwt.sign({id:user.userId},process.env.TOKEN_SECRET || 'tokentest');
 
-   res.header('auth-token',token).json(user);
-   res.json({"msj":'Usuario creado correctamente!',"token":token });
+
+   // res.header('auth-token',token);
+   res.status(200).json({"msj":'Usuario creado correctamente!',"token":token })
+   
+
+   
 }

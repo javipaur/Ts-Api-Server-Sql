@@ -27,11 +27,13 @@ export const singin = async (req:Request,res:Response) => {
     const token=jwt.sign({id:user.userId},process.env.TOKEN_SECRET || 'tokentest',
     {expiresIn:60*60*24});
 
-    res.header('auth-token',token).json(User);
+    //res.header('auth-token',token).json(User);
+    res.header('auth-token',token).json({"msj":'Usuario existe!',"token":token })
 
 }
 export const profile = async (req:Request,res:Response)=>{
-   const user = await User.findOneBy({ userId: req.userId}) 
+    console.log('userId:'+req.body.userId);
+   const user = await User.findOneBy({ userId: req.body.userId}) 
    //const user=await User.findById(req.userId,{pasword:0});
     if(!user)return res.status(404).json('No User found');
     res.json(user);
