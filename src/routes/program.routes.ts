@@ -1,5 +1,5 @@
 import {Router} from'express';
-import { programWelcome } from '../controllers/ProgramController';
+import { NewProgram, programWelcome } from '../controllers/ProgramController';
 
-const router =Router().post('/crearPrograma',programWelcome);
+const router =Router().post('/createNewProgram',NewProgram);
 export default router;
