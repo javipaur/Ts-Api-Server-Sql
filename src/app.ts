@@ -41,7 +41,7 @@ export class App{
     }
 
     routes(){
-        this.app.use(IndexRoutes);
+        this.app.use('/',IndexRoutes);
         this.app.use('/usuarios',UsersRoutes);
         this.app.use('/Auth',AuthRoutes);
         this.app.use('/Program',ProgramRoutes);
