@@ -27,36 +27,23 @@ var text = $($('script')).text();
 var findAndClean = findTextAndReturnRemainder(text,"var et_link_options_data =");
 var direcciones = JSON.parse(findAndClean);
 
-console.log('result')
-console.log(direcciones)
-
-
     const jimmyjazzBoard:any = []
     $rows.each((index, el) => {
       if(index<$rows.length-1){
-     // console.log('index'+index)
       const todo = $(el).find('.et_pb_blurb_description').text().split('\n')
       let titulo:any=''
-      //const fecha = $(el).find('.et_pb_blurb_description').children().text()
-     // console.log('todo'+(todo.length-1))
       for(var i =1;i<todo.length;i++){
          titulo=titulo+' '+todo[i]
          
       }
-
       const fecha =todo[0]
-      //const titulo = $(el).find('.et_pb_blurb_description').first().text().split('\n',1)[1]
-      //const titulo = $(el).find('.et_pb_blurb_description').text().replace(/\t|\n|\s:/g, '').replace(/.*:/g, ' ').trim()
       const img = $(el).find('.et_pb_main_blurb_image').find('img').attr('src')
       const url=direcciones[index].url;
      jimmyjazzBoard.push({ fecha,titulo, img,url})
       } 
   })
- 
-     
   res.json(jimmyjazzBoard);
   
-
 }
 
 export const getEventosOpenData = async (req:Request,res:Response) => {

@@ -11,15 +11,16 @@ import { Roles } from "../src/models/Usuarios/Roles";
 import { User } from "../src/models/Usuarios/User";
 
 
-export const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource(
+{
   type: "mysql",
-  host: "localhost",
-  port: 3306,
-  username: "root",
-  password: "",
-  database: "typeorm",
+ // host: process.env.DATABASE_URL,
+ // port: 3306,
+  //username: "0lkz7h8kv73p0d5zxvu5",
+  //password: "pscale_pw_DlGhnTQVcXUYHN5E525A1YGCn25ADoMiKEtqK1tfMIi",
+  //database: "gasteizclik",
   synchronize: true,
-  logging: true,
+ // logging: true,
   entities: [User,Perfiles,Roles, Programa,Dias,Categorias,Cuadrillas,Bares,Reservas,Tpv],
   subscribers: [],
   migrations: [],
